@@ -16,6 +16,15 @@ dependencies:
 ## Example registration
 
 ```dart
+# TextField used for registration on wodpress
+TextField(
+  decoration: const InputDecoration(
+    hintText: 'Name',
+  ),
+  onChanged: (val) {
+    _name = val;
+  },
+),
 TextField(
   decoration: const InputDecoration(
     hintText: 'Username',
@@ -24,7 +33,6 @@ TextField(
     _username = val;
   },
 ),
-const SizedBox(height: 30.0),
 TextField(
   decoration: const InputDecoration(
     hintText: 'Email',
@@ -33,7 +41,6 @@ TextField(
     _email = val;
   },
 ),
-const SizedBox(height: 30.0),
 TextField(
   decoration: const InputDecoration(
     hintText: 'Password',
@@ -43,7 +50,6 @@ TextField(
     _password = val;
   },
 ),
-const SizedBox(height: 30.0),
 TextField(
   decoration: const InputDecoration(
     hintText: 'Repeat password',
@@ -53,9 +59,11 @@ TextField(
     _password = val;
   },
 ),
+
+# This button set the auth token in your widget
 ElevatedButton(
   onPressed: () async {
-    final result = await signupService.signUp('test name', _email, _username, _password, _password);
+    final result = await signupService.signUp(_name, _email, _username, _password, _password);
     setState(() {
       token = result.asValue!.value.value.toString();
     });
