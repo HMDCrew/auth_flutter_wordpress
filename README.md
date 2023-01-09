@@ -2,12 +2,13 @@
 This module can be used by copying the "auth" folder into the application of your flutter project
 
 ## setup:
-file -> pubspec.yaml 
+File -> pubspec.yaml 
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
+  # Declare auth path in this file to use module in your project
   auth:
     path: ./auth
 ```
