@@ -16,7 +16,7 @@ dependencies:
 ## Example registration
 
 ```dart
-# TextField used for registration on wodpress
+// TextField used for registration on wodpress
 TextField(
   decoration: const InputDecoration(
     hintText: 'Name',
@@ -60,7 +60,7 @@ TextField(
   },
 ),
 
-# This button set the auth token in your widget
+// This button set the auth token in your widget
 ElevatedButton(
   onPressed: () async {
     final result = await signupService.signUp(_name, _email, _username, _password, _password);
