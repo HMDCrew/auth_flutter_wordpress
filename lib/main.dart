@@ -31,24 +31,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   static String baseUrl = "https://dev-dominewptest.pantheonsite.io/";
   static Client client = Client();
   static IAuthApi authApi = AuthApi(client, baseUrl);
   static EmailAuth emailAuth = EmailAuth(authApi);
   ISignUpService signupService = SignUpService(authApi);
 
+  String _name = '';
   String _username = '';
   String _email = '';
   String _password = '';
 
   String token = '';
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +115,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 TextField(
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(16.0),
+                    hintText: 'Name',
+                    hintStyle: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  onChanged: (val) {
+                    _username = val;
+                  },
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(16.0),
                     hintText: 'Username',
                     hintStyle: TextStyle(
                       color: Colors.black,
@@ -174,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ElevatedButton(
                   onPressed: () async {
 
-                    final result = await signupService.signUp('test name', _email, _username, _password, _password);
+                    final result = await signupService.signUp(_name, _email, _username, _password, _password);
 
                     setState(() {
                       token = result.asValue!.value.value.toString();
@@ -197,11 +203,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
