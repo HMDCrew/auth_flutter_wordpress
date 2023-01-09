@@ -1,8 +1,25 @@
-# auth_module
-// get for hub
-A new Flutter project.
+# wordpress authentication module for Flutter (null-safe)
+This module can be used by copying the "auth" folder into the application of your flutter project
 
-## Getting Started
+## setup:
+file -> pubspec.yaml 
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  auth:
+    path: ./auth
+```
+
+## Example registration
+
+## Example login
+
+(the autentication is based on JWT auth)
+for that need install other plugins on wordpress
+
+
 
 This project is a starting point for a Flutter application.
 
