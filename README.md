@@ -13,6 +13,24 @@ dependencies:
     path: ./auth
 ```
 
+
+Widget example file:
+```dart
+// declare this variables to use it in your dart file
+static String baseUrl = "https://dev-dominewptest.pantheonsite.io/"; // any wordpress url
+static Client client = Client();
+static IAuthApi authApi = AuthApi(client, baseUrl);
+static EmailAuth emailAuth = EmailAuth(authApi);
+ISignUpService signupService = SignUpService(authApi);
+
+String _username = '';
+String _name = '';
+String _email = '';
+String _password = '';
+
+String token = '';
+```
+  
 ## Example registration
 
 ```dart
@@ -77,9 +95,47 @@ ElevatedButton(
 
 ## Example login
 
-(the autentication is based on JWT auth)
-for that need install other plugins on wordpress
+```dart
+// TextField used for login
+TextField(
+  decoration: const InputDecoration(
+    hintText: 'Email',
+  ),
+  onChanged: (val) {
+    _email = val;
+  },
+),
+TextField(
+  decoration: const InputDecoration(
+    hintText: 'Password',
+  ),
+  obscureText: true,
+  onChanged: (val) {
+    _password = val;
+  },
+),
 
+// Button to send request for login
+ElevatedButton(
+  onPressed: () async {
+    emailAuth.credential(email: _email, password: _password);
+    final result = await emailAuth.signIn();
+    setState(() {
+      token = result.asValue!.value.value.toString();
+    });
+  },
+  child: Container(
+    alignment: Alignment.center,
+    child: Text('Sign In'),
+  ),
+),
+```
+
+### Note:
+Requirement plugins:
+[JWT Authentication for WP REST API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/)
+<br />
+[Customn routes in plugin](https://github.com/HMDCrew/REST-API-WP-Woo)
 
 
 This project is a starting point for a Flutter application.
