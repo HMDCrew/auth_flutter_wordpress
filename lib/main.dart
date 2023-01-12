@@ -31,13 +31,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static String baseUrl = "https://dev-dominewptest.pantheonsite.io/";
+  static String baseUrl = "https://dev-panasonic.pantheonsite.io/";
   static Client client = Client();
-  static IAuthApi authApi = AuthApi(client, baseUrl);
-  static EmailAuth emailAuth = EmailAuth(authApi);
-  ISignUpService signupService = SignUpService(authApi);
+  static AuthApi authApi = AuthApi(client, baseUrl);
 
-  String _name = '';
   String _username = '';
   String _email = '';
   String _password = '';
@@ -89,11 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 30.0),
                 ElevatedButton(
                   onPressed: () async {
-                    emailAuth.credential(email: _email, password: _password);
-                    final result = await emailAuth.signIn();
-
+                    final result = await authApi.signIn(username: _email, password: _password);
                     setState(() {
-                      token = result.asValue!.value.value.toString();
+                      token = result.asValue!.value.toString();
                     });
                   },
                   child: Container(
@@ -112,18 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
       
       
                 const Text('Register section'),
-                TextField(
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(16.0),
-                    hintText: 'Name',
-                    hintStyle: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  onChanged: (val) {
-                    _username = val;
-                  },
-                ),
                 TextField(
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(16.0),
@@ -179,11 +162,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-
-                    final result = await signupService.signUp(_name, _email, _username, _password, _password);
-
+                    final result = await authApi.signUp(name: 'test name', username: _username, email: _email, password: _password, repeatPassword: _password);
                     setState(() {
-                      token = result.asValue!.value.value.toString();
+                      token = result.asValue!.value.toString();
                     });
                   },
                   child: Container(
