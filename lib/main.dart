@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static String baseUrl = "https://dev-panasonic.pantheonsite.io/";
+  static String baseUrl = "https://dev-dominewptest.pantheonsite.io/";
   static Client client = Client();
   static AuthApi authApi = AuthApi(client, baseUrl);
 
