@@ -19,9 +19,7 @@ Widget example file:
 // declare this variables to use it in your dart file
 static String baseUrl = "https://dev-dominewptest.pantheonsite.io/"; // any wordpress url
 static Client client = Client();
-static IAuthApi authApi = AuthApi(client, baseUrl);
-static EmailAuth emailAuth = EmailAuth(authApi);
-ISignUpService signupService = SignUpService(authApi);
+static AuthApi authApi = AuthApi(client, baseUrl);
 
 String _username = '';
 String _email = '';
