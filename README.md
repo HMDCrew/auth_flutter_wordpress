@@ -24,7 +24,6 @@ static EmailAuth emailAuth = EmailAuth(authApi);
 ISignUpService signupService = SignUpService(authApi);
 
 String _username = '';
-String _name = '';
 String _email = '';
 String _password = '';
 
@@ -35,14 +34,6 @@ String token = '';
 
 ```dart
 // TextField used for registration on wodpress
-TextField(
-  decoration: const InputDecoration(
-    hintText: 'Name',
-  ),
-  onChanged: (val) {
-    _name = val;
-  },
-),
 TextField(
   decoration: const InputDecoration(
     hintText: 'Username',
@@ -81,9 +72,9 @@ TextField(
 // This button set the auth token in your widget
 ElevatedButton(
   onPressed: () async {
-    final result = await signupService.signUp(_name, _email, _username, _password, _password);
+    final result = await authApi.signUp(name: 'test name', username: _username, email: _email, password: _password, repeatPassword: _password);
     setState(() {
-      token = result.asValue!.value.value.toString();
+      token = result.asValue!.value.toString();
     });
   },
   child: Container(
@@ -118,10 +109,9 @@ TextField(
 // Button to send request for login
 ElevatedButton(
   onPressed: () async {
-    emailAuth.credential(email: _email, password: _password);
-    final result = await emailAuth.signIn();
+    final result = await authApi.signIn(username: _email, password: _password);
     setState(() {
-      token = result.asValue!.value.value.toString();
+      token = result.asValue!.value.toString();
     });
   },
   child: Container(
