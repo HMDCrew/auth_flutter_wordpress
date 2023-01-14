@@ -1,7 +1,7 @@
 # wordpress authentication module for Flutter (null-safe)
 This module can be used by copying the "auth" folder into the application of your flutter project
 
-## setup:
+## Getting Started
 File -> pubspec.yaml 
 
 ```yaml
